@@ -11,7 +11,7 @@ export default function (props: Props): JSX.Element {
   return (
     <div styleName="layout">
       <Header />
-      <div styleName="page">{props.children}</div>
+      <div styleName="page" data-testid="page">{props.children}</div>
     </div>
   );
 }
