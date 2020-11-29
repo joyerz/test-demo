@@ -25,10 +25,12 @@ export default function (): JSX.Element {
     };
   }, [action]);
 
+  console.log(state);
+
   return (
     <>
       <h1>Home Page</h1>
-      <CallTimes number={state.history ? state.history.length : 0} />
+      <CallTimes history={state.history} />
       <Tree data={state.data} />
     </>
   );
