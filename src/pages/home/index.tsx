@@ -4,6 +4,7 @@ import { updateState } from '@/store';
 import { fetchGithub } from '@/store/github';
 
 import Tree from '@components/tree';
+import CallTimes from '@components/callTimes';
 
 import './index.less';
 
@@ -21,14 +22,10 @@ export default function (): JSX.Element {
   }, [action]);
 
   return (
-    <div>
+    <>
       <h1>Home Page</h1>
-      <div styleName="record">
-        call times:
-        {' '}
-        {state.history ? state.history.length : 0}
-      </div>
+      <CallTimes number={state.history ? state.history.length : 0} />
       <Tree data={state.data} />
-    </div>
+    </>
   );
 }
