@@ -2,7 +2,7 @@
 import { createStore } from 'little-state-machine';
 
 createStore({
-  history: null,
+  history: [],
   data: null,
 });
 
@@ -16,7 +16,7 @@ export default {};
 export function updateState(state, payload) {
   return {
     ...state,
-    data: payload.data,
+    data: payload.data ? payload.data : state.data,
     history: state.history instanceof Array
       ? [...state.history, payload.history]
       : [payload.history],

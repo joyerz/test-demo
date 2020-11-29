@@ -19,9 +19,22 @@ afterEach(() => {
 
 describe('test Tree component render', () => {
   it('test Tree component render', () => {
+    const history = [
+      {
+        startedAt: Date.now() - 1000,
+        timeSpent: 100,
+        success: true,
+      },
+      {
+        startedAt: Date.now(),
+        timeSpent: 100,
+        success: false,
+      },
+    ];
     act(() => {
-      render(<CallTimes number={3} />, container);
+      render(<CallTimes history={history} />, container);
     });
-    expect(container.textContent).toBe('Calls: 3');
+    expect(container.querySelector('[data-testid=calls]').textContent).toBe('2');
+    expect(container.querySelector('[data-testid=successCounter]').textContent).toBe('1');
   });
 });

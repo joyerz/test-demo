@@ -18,7 +18,11 @@ export default function (): JSX.Element {
       const res = await fetchGithub();
       action(res);
     };
-    fetchData();
+    const intervalId = setInterval(fetchData, 5000);
+
+    return () => {
+      clearInterval(intervalId);
+    };
   }, [action]);
 
   return (
