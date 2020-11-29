@@ -1,5 +1,8 @@
 const path = require('path');
 const webpack = require('webpack');
+const TerserJSPlugin = require('terser-webpack-plugin');
+const OptimizeCSSAssetsPlugin = require('optimize-css-assets-webpack-plugin');
+const CleanWebpackPlugin = require('clean-webpack-plugin');
 const base = require('./webpack.base');
 
 const {
@@ -7,14 +10,36 @@ const {
 } = base;
 
 module.exports = {
-  mode: 'development',
-  devtool: 'inline-source-map',
+  mode: 'production',
+  devtool: false,
+  performance: {
+    hints: false,
+    maxEntrypointSize: 512000,
+    maxAssetSize: 512000,
+  },
+  optimization: {
+    minimizer: [
+      new TerserJSPlugin({
+        terserOptions: {
+          compress: {
+            drop_console: false, // 删除console
+          },
+        },
+      }),
+      new OptimizeCSSAssetsPlugin({}),
+    ],
+    mangleWasmImports: true,
+    mergeDuplicateChunks: true,
+
+    portableRecords: true,
+  },
+
   entry: path.resolve(__dirname, '../src/index.tsx'),
   output: {
     path: path.resolve(__dirname, '../dist'),
-    publicPath: '/',
-    filename: 'bundle.js',
-    chunkFilename: '[name].js',
+    publicPath: '',
+    filename: 'js/[name].[hash:8].bundle.js',
+    chunkFilename: 'js/[name].[chunkhash].js',
     crossOriginLoading: 'anonymous',
   },
   module: {
@@ -22,6 +47,9 @@ module.exports = {
   },
   resolve,
   plugins: [
+    new CleanWebpackPlugin({
+      cleanOnceBeforeBuildPatterns: ['**/*'],
+    }),
     new webpack.DefinePlugin({
     }),
     ...plugins,
