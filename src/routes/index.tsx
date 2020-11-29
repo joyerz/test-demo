@@ -3,7 +3,7 @@ import { Switch, Route, BrowserRouter as Router } from 'react-router-dom';
 import { setHistory } from '@/routes/helper';
 
 import Layout from '@components/layout';
-import Home from '@pages/home';
+import Home from '@/pages/home';
 
 const History = React.lazy(() => import('@/pages/history'));
 
