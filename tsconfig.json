@@ -1,0 +1,40 @@
+{
+  "compilerOptions": {
+    "outDir": "./dist/",
+    "sourceMap": true,
+    "noImplicitAny": false,
+    "esModuleInterop": true,
+    "allowSyntheticDefaultImports": true,
+    "module": "commonjs",
+    "target": "es6",
+    "jsx": "react",
+    "allowJs": false, /* Allow javascript files to be compiled. */
+    "typeRoots": [
+      "./node_modules/@types",
+      "./src/@types"
+    ],
+    "types": [
+      "react",
+      "react-dom",
+      // "react-css-modules"
+    ],
+    "baseUrl": "./",
+    "paths": {
+      "@/*": [
+        "src/*"
+      ],
+      "@pages/*": [
+        "src/pages/*"
+      ],
+      "@components/*": [
+        "src/components/*"
+      ],
+      "@src/*": [
+        "src/*"
+      ],
+      "@assets/*": [
+        "src/assets/*"
+      ]
+    }
+  }
+}
