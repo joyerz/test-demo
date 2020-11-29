@@ -19,8 +19,9 @@ afterEach(() => {
 
 describe('test header', () => {
   it('Header have two links', () => {
+    const navTo = jest.fn();
     act(() => {
-      render(<Header />, container);
+      render(<Header navTo={navTo} />, container);
     });
     expect(container.querySelectorAll('a').length).toBe(2);
 
@@ -28,5 +29,15 @@ describe('test header', () => {
     const HistoryNav = container.querySelectorAll('a')[1];
     expect(HomeNav.textContent).toBe('Home');
     expect(HistoryNav.textContent).toBe('History');
+
+    act(() => {
+      HomeNav.dispatchEvent(new MouseEvent('click', { bubbles: true }));
+    });
+    expect(navTo).toHaveBeenCalledTimes(1);
+
+    act(() => {
+      HistoryNav.dispatchEvent(new MouseEvent('click', { bubbles: true }));
+    });
+    expect(navTo).toHaveBeenCalledTimes(2);
   });
 });

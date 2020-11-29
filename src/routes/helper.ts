@@ -9,6 +9,13 @@ export function setHistory(routerHistory):void {
 }
 
 /**
+ * get history
+ */
+export function getHistory(): void {
+  return history;
+}
+
+/**
  * navigation to...
  * @param href
  */
